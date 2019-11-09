@@ -1,3 +1,25 @@
+var dispDiv = document.getElementById("display");
+var gheight = 0;
+
+setInterval(function(){
+    var b = Math.round(Math.random()*100);
+    var rg = Math.round(Math.random()*30);
+    dispDiv.style.backgroundColor = "rgb("+rg+","+rg+","+b+")";
+},5000);
+function make10Snows(){
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+    makeItSnow();
+}
+
+
 function makeItSnow(){
  var snow = document.createElement("div");
  snow.innerHTML = '<svg class="svgs" xmlns="http://www.w3.org/2000/svg" viewBox="0
@@ -44,4 +66,30 @@ d="M77.48,15.52A42.5,42.5,0,1,1,7.57,54.44C9.9,52.3,28.21,42.81,36,25,43,9,70.46
  }, 10000);
  }, 10);
 }
-new
+
+
+
+var timer = null;
+document.getElementById("start").addEventListener("click", function(){
+    //document.getElementById("snow").style.top = "100%";
+    //document.getElementById("snow2").style.top = "100%";
+    if(timer == null){
+      timer = setInterval(make10Snows, 500);
+    }
+});
+
+document.getElementById("stop").addEventListener("click", function(){
+  clearInterval(timer);
+  timer = null;
+});
+
+document.getElementById("freq").addEventListener("change", function(){
+  if(timer != null){
+    
+  clearInterval(timer);
+   var mnum = document.getElementById("freq").value;
+    mnum = parseInt(mnum) * 100;
+    var spd = 1100 - mnum;
+    timer = setInterval(make10Snows, spd);
+  }
+});
